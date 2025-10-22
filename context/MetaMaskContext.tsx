@@ -38,10 +38,17 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const ethereum = sdk?.getProvider();
       if (!ethereum) throw new Error("MetaMask provider not available");
-      const accounts = await ethereum.request({
+
+      const accounts = (await ethereum.request({
         method: "eth_requestAccounts",
-      });
-      setAddress(accounts[0]);
+      })) as string[];
+
+      if (accounts.length > 0) {
+        setAddress(accounts[0]);
+      } else {
+        setAddress(null);
+      }
+
       setProvider(new ethers.BrowserProvider(ethereum));
     } catch (err) {
       console.error("Connection failed:", err);

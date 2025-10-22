@@ -18,7 +18,7 @@ type ChartData = {
 export default function TradingChart() {
   const [data, setData] = useState<ChartData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [trendColor, setTrendColor] = useState("#22c55e"); // green by default
+  const [trendColor, setTrendColor] = useState("#22c55e");
 
   async function fetchBTCPrice() {
     try {
